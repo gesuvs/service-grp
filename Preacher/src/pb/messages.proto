@@ -1,39 +1,28 @@
 syntax = "proto3";
 
-message User{
-    int32 id= 1;
-    string name=2;
-    string username=3;
-    string email=4;
-    string password=5;
+message User {
+  int32 id = 1;
+  string name = 2;
+  string username = 3;
+  string email = 4;
+  string password = 5;
 }
 
+message GetUserByIdRequest { int32 id = 1; }
 
-message GetUserByIdRequest{
-    int32 id=1;
+message UserResponse { User user = 1; }
+
+message SaveUserRequest { User user = 1; }
+
+message LoginUserRequest {
+  string username = 1;
+  string password = 2;
 }
 
-message UserResponse{
-    User user =1;
-}
-
-
-message SaveUserRequest{
-    User user =1;
-}
-
-
-message LoginUserRequest{
-    string username=2;
-    string password=4;
-}
-
-message LoginUserResponse{
-    string token=1;
-}
+message LoginUserResponse { string token = 1; }
 
 service UserService {
-    rpc SaveUser (SaveUserRequest) returns (UserResponse);
-    rpc GetUserById (GetUserByIdRequest) returns (UserResponse);
-    rpc Login (LoginUserRequest) returns (LoginUserResponse);
+  rpc SaveUser(SaveUserRequest) returns (UserResponse);
+  rpc GetUserById(GetUserByIdRequest) returns (UserResponse);
+  rpc Login(LoginUserRequest) returns (LoginUserResponse);
 }
